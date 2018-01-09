@@ -38,7 +38,7 @@
           "type" : "boolean",
           "default" : false
         },
-        "addressVerificationId" : {
+        "addressVerification" : {
           "type" : "string"
         },
         "addressClassification" : {
