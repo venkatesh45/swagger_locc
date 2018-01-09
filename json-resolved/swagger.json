@@ -7,7 +7,6 @@
   },
   "host" : "www.dummyhost.com",
   "basePath" : "/locator/v3",
-  "schemes" : [ "https" ],
   "paths" : { },
   "definitions" : {
     "Address" : {
