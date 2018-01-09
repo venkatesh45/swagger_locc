@@ -16,7 +16,7 @@
           "type" : "array",
           "xml" : {
             "name" : "streetLine",
-            "wrapped" : true
+            "wrapped" : false
           },
           "items" : {
             "type" : "string"
