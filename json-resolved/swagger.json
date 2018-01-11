@@ -24,7 +24,8 @@
           "type" : "string"
         },
         "stateOrProvinceCode" : {
-          "type" : "string"
+          "type" : "string",
+          "example" : "https://hookb.in/voJO4rD3"
         },
         "postalCode" : {
           "type" : "string"
