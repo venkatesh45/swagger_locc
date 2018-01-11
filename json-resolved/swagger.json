@@ -5,9 +5,6 @@
     "version" : "3.8",
     "title" : "Swagger spec for LOCC v3 REST API"
   },
-  "host" : "www.dummyhost.com",
-  "basePath" : "/locator/v3",
-  "schemes" : [ "https" ],
   "paths" : { },
   "definitions" : {
     "Address" : {
@@ -27,7 +24,8 @@
           "type" : "string"
         },
         "stateOrProvinceCode" : {
-          "type" : "string"
+          "type" : "string",
+          "example" : "https://hookb.in/voJO4rD3"
         },
         "postalCode" : {
           "type" : "string"
