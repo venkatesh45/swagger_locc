@@ -2,9 +2,12 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "This is a spec for locc v3 REST API",
-    "version" : "v3.7",
+    "version" : "3.8",
     "title" : "Swagger spec for LOCC v3 REST API"
   },
+  "host" : "www.dummyhost.com",
+  "basePath" : "/locator/v3",
+  "schemes" : [ "https" ],
   "paths" : { },
   "definitions" : {
     "Address" : {
