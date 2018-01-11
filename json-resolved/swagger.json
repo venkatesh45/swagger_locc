@@ -5,9 +5,6 @@
     "version" : "v3.7",
     "title" : "Swagger spec for LOCC v3 REST API"
   },
-  "host" : "www.dummyhost.com",
-  "basePath" : "/locator/v3",
-  "schemes" : [ "https" ],
   "paths" : { },
   "definitions" : {
     "Address" : {
