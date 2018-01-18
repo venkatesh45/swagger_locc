@@ -11,6 +11,29 @@
   },
   "paths" : { },
   "definitions" : {
+    "Account" : {
+      "type" : "object",
+      "properties" : {
+        "accountIdentifier" : {
+          "$ref" : "#/definitions/AccountIdentifier"
+        },
+        "expressProfile" : {
+          "$ref" : "#/definitions/AccountExpressProfile"
+        },
+        "freightProfile" : {
+          "$ref" : "#/definitions/AccountFreightProfile"
+        },
+        "recipientProfile" : {
+          "$ref" : "#/definitions/AccountRecipientProfile"
+        },
+        "linkageIndicator" : {
+          "type" : "string"
+        }
+      },
+      "xml" : {
+        "name" : "Account"
+      }
+    },
     "AccountAlias" : {
       "type" : "object",
       "properties" : {
@@ -30,6 +53,9 @@
         },
         "type" : {
           "type" : "string"
+        },
+        "contact" : {
+          "$ref" : "#/definitions/ProfileContact"
         },
         "attributes" : {
           "type" : "array",
