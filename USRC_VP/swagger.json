@@ -9,7 +9,6 @@
       "url" : "http://home.fedex.com"
     }
   },
-  "schemes" : [ "https" ],
   "paths" : { },
   "definitions" : {
     "Account" : {
