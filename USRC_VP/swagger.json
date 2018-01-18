@@ -1,0 +1,4388 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "description",
+    "version" : "1.0.0",
+    "title" : "USRC",
+    "license" : {
+      "name" : "FedEx Services",
+      "url" : "http://home.fedex.com"
+    }
+  },
+  "schemes" : [ "https" ],
+  "paths" : { },
+  "definitions" : {
+    "Account" : {
+      "type" : "object",
+      "properties" : {
+        "accountIdentifier" : {
+          "$ref" : "#/definitions/AccountIdentifier"
+        },
+        "expressProfile" : {
+          "$ref" : "#/definitions/AccountExpressProfile"
+        },
+        "freightProfile" : {
+          "$ref" : "#/definitions/AccountFreightProfile"
+        },
+        "recipientProfile" : {
+          "$ref" : "#/definitions/AccountRecipientProfile"
+        },
+        "linkageIndicator" : {
+          "type" : "string"
+        }
+      },
+      "xml" : {
+        "name" : "Account"
+      }
+    },
+    "AccountAlias" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "contactAndAddress" : {
+          "$ref" : "#/definitions/ContactAndAddress"
+        }
+      }
+    },
+    "AccountAliasDetail" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "type" : {
+          "type" : "string"
+        },
+        "contact" : {
+          "$ref" : "#/definitions/ProfileContact"
+        },
+        "attributes" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "AccountExpressProfile" : {
+      "type" : "object",
+      "properties" : {
+        "contactAndAddress" : {
+          "$ref" : "#/definitions/ParsedContactAndAddress"
+        },
+        "billingContact" : {
+          "$ref" : "#/definitions/ParsedContactAndAddress"
+        },
+        "billToAttention" : {
+          "type" : "string"
+        },
+        "shippingContact" : {
+          "$ref" : "#/definitions/ParsedContactAndAddress"
+        },
+        "creditCard" : {
+          "$ref" : "#/definitions/CreditCard"
+        },
+        "creditCardStatus" : {
+          "type" : "string",
+          "enum" : [ "CURRENT", "EXPIRED", "EXPIRING_SOON" ]
+        },
+        "accountStatus" : {
+          "type" : "string",
+          "enum" : [ "CASH", "ACTIVE", "DEACTIVATED" ]
+        },
+        "thirdDeclineBlockStatus" : {
+          "type" : "string",
+          "enum" : [ "BLOCKED", "NOT_BLOCKED" ]
+        }
+      }
+    },
+    "AccountFreightProfile" : {
+      "type" : "object",
+      "properties" : {
+        "accountStatus" : {
+          "type" : "string",
+          "enum" : [ "ESTABLISHED", "NOT_ESTABLISHED", "ESTABLISHED_FOR_DELETION" ]
+        },
+        "profileStatus" : {
+          "type" : "string",
+          "enum" : [ "ACTIVE", "INACTIVE" ]
+        },
+        "billingContact" : {
+          "$ref" : "#/definitions/ParsedContactAndAddress"
+        },
+        "shippingContact" : {
+          "$ref" : "#/definitions/ParsedContactAndAddress"
+        },
+        "activeAliasList" : {
+          "type" : "array",
+          "xml" : {
+            "wrapped" : true
+          },
+          "items" : {
+            "$ref" : "#/definitions/AccountAlias"
+          }
+        },
+        "inactiveAliasList" : {
+          "type" : "array",
+          "xml" : {
+            "wrapped" : true
+          },
+          "items" : {
+            "$ref" : "#/definitions/AccountAlias"
+          }
+        },
+        "accountPayertype" : {
+          "type" : "string",
+          "enum" : [ "BILL_TO", "SHIPPER" ]
+        }
+      }
+    },
+    "AccountGroupDetail" : {
+      "type" : "object",
+      "properties" : {
+        "groupCode" : {
+          "type" : "string"
+        },
+        "groupId" : {
+          "type" : "string"
+        },
+        "masterAccountDetail" : {
+          "$ref" : "#/definitions/AccountGroupMasterAccountDetail"
+        }
+      }
+    },
+    "AccountGroupMasterAccountDetail" : {
+      "type" : "object",
+      "properties" : {
+        "accountNumber" : {
+          "type" : "string"
+        },
+        "operatingCompany" : {
+          "type" : "string"
+        },
+        "pricingSubGroupCode" : {
+          "type" : "string"
+        },
+        "nationalAccountType" : {
+          "type" : "string"
+        }
+      }
+    },
+    "AccountGroupMembershipDetail" : {
+      "type" : "object",
+      "properties" : {
+        "accountGroup" : {
+          "$ref" : "#/definitions/AccountGroupDetail"
+        },
+        "effectiveDate" : {
+          "type" : "string"
+        },
+        "expirationDate" : {
+          "type" : "string"
+        }
+      }
+    },
+    "AccountIdentifier" : {
+      "type" : "object",
+      "properties" : {
+        "accountNumber" : {
+          "$ref" : "#/definitions/AccountNumber"
+        },
+        "accountNickname" : {
+          "type" : "string"
+        },
+        "displayName" : {
+          "type" : "string"
+        },
+        "meterNumber" : {
+          "type" : "string"
+        }
+      }
+    },
+    "AccountLevelUrlOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "accountLevelSettingsPage" : {
+          "type" : "string"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "AccountNumber" : {
+      "type" : "object",
+      "properties" : {
+        "value" : {
+          "type" : "string"
+        },
+        "key" : {
+          "type" : "string"
+        }
+      }
+    },
+    "AccountProfile" : {
+      "type" : "object",
+      "properties" : {
+        "usageType" : {
+          "type" : "string",
+          "enum" : [ "BILL_TO", "SHIPPER" ]
+        },
+        "profileType" : {
+          "type" : "string",
+          "enum" : [ "FREIGHT" ]
+        },
+        "scacCode" : {
+          "type" : "string"
+        },
+        "profileStatus" : {
+          "type" : "string",
+          "enum" : [ "ACTIVE", "INACTIVE" ]
+        },
+        "billingContactAndAddress" : {
+          "$ref" : "#/definitions/ContactAndAddress"
+        },
+        "shippingContactAndAddress" : {
+          "$ref" : "#/definitions/ContactAndAddress"
+        }
+      }
+    },
+    "AccountRecipientProfile" : {
+      "type" : "object",
+      "properties" : {
+        "contactAndAddress" : {
+          "$ref" : "#/definitions/ParsedContactAndAddress"
+        },
+        "authorizedName" : {
+          "$ref" : "#/definitions/ParsedPersonName"
+        },
+        "alternateFirstNames" : {
+          "type" : "array",
+          "xml" : {
+            "name" : "alternateFirstNamesList",
+            "wrapped" : true
+          },
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "deliveryAddressList" : {
+          "type" : "array",
+          "xml" : {
+            "wrapped" : true
+          },
+          "items" : {
+            "$ref" : "#/definitions/DeliveryAddress"
+          }
+        },
+        "enrollmentStatusInfo" : {
+          "$ref" : "#/definitions/RecipientEnrollmentInfo"
+        },
+        "creditCard" : {
+          "$ref" : "#/definitions/CreditCard"
+        },
+        "creditCardStatus" : {
+          "type" : "string",
+          "enum" : [ "CURRENT", "EXPIRED", "EXPIRING_SOON" ]
+        },
+        "thirdUpdateDeclineStatus" : {
+          "type" : "string",
+          "enum" : [ "BLOCKED", "NOT_BLOCKED" ]
+        },
+        "expressCreditCardUsageEligibility" : {
+          "type" : "string",
+          "enum" : [ "ELIGIBLE", "NOTELIGIBLE_EXPIRED", "NOTELIGIBLE_COUNTRY_NOT_US", "NOTELIGIBLE_NON_US_CARD", "NOTELIGIBLE_THIRD_DECLINE", "NOTELIGIBLE_OTHER" ]
+        },
+        "billingContact" : {
+          "$ref" : "#/definitions/ParsedContactAndAddress"
+        },
+        "recipientNotificationEvents" : {
+          "type" : "array",
+          "xml" : {
+            "name" : "recipientNotificationEventsList",
+            "wrapped" : true
+          },
+          "items" : {
+            "$ref" : "#/definitions/RecipientNotificationEvent"
+          }
+        },
+        "useExpressCreditCard" : {
+          "type" : "string",
+          "enum" : [ "OPTED_IN", "NOT_OPTED" ]
+        }
+      }
+    },
+    "AccountRetrievalOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "customerAccountList" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CustomerAccountInfo"
+          }
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "AddRecipientDeliveryAddressInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "examSessionId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Address" : {
+      "type" : "object",
+      "properties" : {
+        "streetLines" : {
+          "type" : "array",
+          "xml" : {
+            "name" : "streetLineList",
+            "wrapped" : true
+          },
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "city" : {
+          "type" : "string"
+        },
+        "stateOrProvinceCode" : {
+          "type" : "string"
+        },
+        "postalCode" : {
+          "type" : "string"
+        },
+        "countryCode" : {
+          "type" : "string"
+        },
+        "residential" : {
+          "type" : "boolean"
+        },
+        "addressVerificationId" : {
+          "type" : "string"
+        },
+        "addressClassification" : {
+          "type" : "string",
+          "enum" : [ "MIXED", "UNKNOWN", "BUSINESS", "RESIDENTIAL" ]
+        },
+        "addressClassificationConfidence" : {
+          "type" : "string",
+          "enum" : [ "POTENTIAL", "PERMANENT" ]
+        },
+        "shareId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "AddressAncillaryDetail" : {
+      "type" : "object",
+      "properties" : {
+        "locationInCity" : {
+          "type" : "string"
+        },
+        "locationInProperty" : {
+          "type" : "string"
+        },
+        "building" : {
+          "type" : "string"
+        },
+        "department" : {
+          "type" : "string"
+        },
+        "roomFloor" : {
+          "type" : "string"
+        },
+        "suite" : {
+          "type" : "string"
+        },
+        "apartment" : {
+          "type" : "string"
+        },
+        "room" : {
+          "type" : "string"
+        },
+        "crossStreet" : {
+          "type" : "string"
+        },
+        "addtionalDescriptions" : {
+          "type" : "string"
+        },
+        "adderssVerificationOverrideReason" : {
+          "type" : "string"
+        }
+      }
+    },
+    "AddressAuthExamDetailsInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "addressVerificationId" : {
+          "type" : "string"
+        },
+        "trackingInfo" : {
+          "$ref" : "#/definitions/TrackingInfo"
+        },
+        "examSessionId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "AddressAuthExamDetailsOutputV3VO" : {
+      "type" : "object",
+      "properties" : {
+        "addressAuthExamInfo" : {
+          "$ref" : "#/definitions/AddressAuthExamInfo"
+        },
+        "addressVerificationId" : {
+          "type" : "string"
+        },
+        "trackingNumber" : {
+          "type" : "string"
+        },
+        "examSessionId" : {
+          "type" : "string"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      },
+      "xml" : {
+        "name" : "AddressAuthExamDetailsResponse"
+      }
+    },
+    "AddressAuthExamInfo" : {
+      "type" : "object",
+      "properties" : {
+        "parsedContactAndAddress" : {
+          "$ref" : "#/definitions/ParsedContactAndAddress"
+        },
+        "examLanguageType" : {
+          "type" : "string"
+        },
+        "examStrategyType" : {
+          "type" : "string"
+        },
+        "examStatusType" : {
+          "type" : "string"
+        },
+        "examPassFail" : {
+          "type" : "string",
+          "enum" : [ "PASS", "FAIL" ]
+        },
+        "examScore" : {
+          "type" : "string"
+        },
+        "examErrorStatus" : {
+          "type" : "string"
+        }
+      }
+    },
+    "AirCargoDetail" : {
+      "type" : "object",
+      "properties" : {
+        "airCargoSubAccountType" : {
+          "type" : "string"
+        },
+        "synonyms" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "brokerPaymentType" : {
+          "type" : "string"
+        },
+        "brokerAccountNumber" : {
+          "type" : "string"
+        },
+        "airportIATAAgentId" : {
+          "type" : "string"
+        },
+        "payorType" : {
+          "type" : "string"
+        },
+        "associatedAirportId" : {
+          "type" : "string"
+        },
+        "billingInstructions" : {
+          "type" : "string"
+        }
+      }
+    },
+    "AppRoleInfo" : {
+      "type" : "object",
+      "properties" : {
+        "appName" : {
+          "type" : "string"
+        },
+        "roleCode" : {
+          "type" : "string",
+          "enum" : [ "ADMIN", "INVITED", "USER" ]
+        }
+      }
+    },
+    "AssociatedCompanyAccount" : {
+      "type" : "object",
+      "properties" : {
+        "companyIdentifier" : {
+          "type" : "string"
+        },
+        "accountNumber" : {
+          "type" : "string"
+        },
+        "accountDetails" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/KeyValueDetail"
+          }
+        }
+      }
+    },
+    "AuthorizedAddress" : {
+      "type" : "object",
+      "properties" : {
+        "sequenceNumber" : {
+          "type" : "string"
+        },
+        "address" : {
+          "$ref" : "#/definitions/Address"
+        }
+      }
+    },
+    "BankSecurityAuthorizedInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "creditCard" : {
+          "$ref" : "#/definitions/CreditCard"
+        },
+        "ratedAmount" : {
+          "$ref" : "#/definitions/Money"
+        },
+        "shipmentOriginCountry" : {
+          "type" : "string"
+        }
+      }
+    },
+    "BankSecurityAuthorizedOutputV3VO" : {
+      "type" : "object",
+      "properties" : {
+        "enrolled" : {
+          "type" : "boolean"
+        },
+        "bankUrl" : {
+          "type" : "string"
+        },
+        "parequest" : {
+          "type" : "string"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "BankSecurityEnrolledInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "creditCard" : {
+          "$ref" : "#/definitions/CreditCard"
+        }
+      }
+    },
+    "BankSecurityEnrolledOutputV3VO" : {
+      "type" : "object",
+      "properties" : {
+        "enrolled" : {
+          "type" : "boolean"
+        },
+        "bankUrl" : {
+          "type" : "string"
+        },
+        "parequest" : {
+          "type" : "string"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "CALError" : {
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "type" : "string"
+        },
+        "message" : {
+          "type" : "string"
+        },
+        "contextList" : {
+          "type" : "array",
+          "xml" : {
+            "wrapped" : true
+          },
+          "items" : {
+            "$ref" : "#/definitions/Context"
+          }
+        },
+        "source" : {
+          "type" : "string",
+          "enum" : [ "CSHP", "CACS", "FDSD", "CRSV", "CMDC", "ROSS", "GSAI", "PMIS", "VACS", "CNTY", "IPAS", "FCL", "WFSM", "CRDT", "NDS", "RATC", "USRC", "PUDC", "SHPC", "TRKC", "WGTM", "SHARE", "SHAREPROFILE", "WRLS", "IFSS", "CDAC", "ACXIOM", "JTRACK", "WIDM", "CPCIH", "ACTC", "CLMC", "CLMS", "LOCS", "CDUS", "DOCC", "GTIC", "GTT", "WNLB", "WSSO", "WSTM", "CAAS", "CMCC", "SWAB", "CATS", "FRPB", "FRPC", "PARC", "SPST", "ADMC", "EPP", "PRDC", "ESOT", "EDD", "EPRS", "LOCC", "CLOS", "COUNTRYCXS", "SHIPHISTORYCXS", "PREFERENCECXS", "TEMPLATECXS", "BOOKINGCXS", "ADDRESSBOOKCXS", "AVALIBILITYCXS", "ASHQ" ]
+        },
+        "messageParameters" : {
+          "type" : "array",
+          "xml" : {
+            "name" : "messageParameterList",
+            "wrapped" : true
+          },
+          "items" : {
+            "$ref" : "#/definitions/MessageParameters"
+          }
+        },
+        "rootCause" : {
+          "$ref" : "#/definitions/Cause"
+        },
+        "transactionDetail" : {
+          "$ref" : "#/definitions/TransactionDetailVO"
+        }
+      },
+      "xml" : {
+        "name" : "CALError"
+      }
+    },
+    "CALException" : {
+      "type" : "object",
+      "properties" : {
+        "cause" : {
+          "$ref" : "#/definitions/Throwable"
+        },
+        "stackTrace" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/StackTraceElement"
+          }
+        },
+        "errors" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CALError"
+          }
+        },
+        "transactionDetails" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/TransactionDetailVO"
+          }
+        },
+        "cxsErrors" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSError"
+          }
+        },
+        "errorKeys" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "message" : {
+          "type" : "string"
+        },
+        "localizedMessage" : {
+          "type" : "string"
+        },
+        "suppressed" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Throwable"
+          }
+        }
+      }
+    },
+    "CXSAlert" : {
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "type" : "string"
+        },
+        "message" : {
+          "type" : "string"
+        },
+        "alertType" : {
+          "type" : "string",
+          "enum" : [ "NOTE", "WARNING" ]
+        }
+      }
+    },
+    "CXSError" : {
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "type" : "string"
+        },
+        "message" : {
+          "type" : "string"
+        },
+        "parameterList" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Parameter"
+          }
+        }
+      },
+      "xml" : {
+        "name" : "CXSError"
+      }
+    },
+    "CacheDataOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      },
+      "xml" : {
+        "name" : "CacheDataOutputVO"
+      }
+    },
+    "CancelEnterpriseCustomerProfileOutputV3VO" : {
+      "type" : "object",
+      "properties" : {
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "Cause" : {
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "type" : "string"
+        },
+        "message" : {
+          "type" : "string"
+        },
+        "source" : {
+          "type" : "string",
+          "enum" : [ "CSHP", "CACS", "FDSD", "CRSV", "CMDC", "ROSS", "GSAI", "PMIS", "VACS", "CNTY", "IPAS", "FCL", "WFSM", "CRDT", "NDS", "RATC", "USRC", "PUDC", "SHPC", "TRKC", "WGTM", "SHARE", "SHAREPROFILE", "WRLS", "IFSS", "CDAC", "ACXIOM", "JTRACK", "WIDM", "CPCIH", "ACTC", "CLMC", "CLMS", "LOCS", "CDUS", "DOCC", "GTIC", "GTT", "WNLB", "WSSO", "WSTM", "CAAS", "CMCC", "SWAB", "CATS", "FRPB", "FRPC", "PARC", "SPST", "ADMC", "EPP", "PRDC", "ESOT", "EDD", "EPRS", "LOCC", "CLOS", "COUNTRYCXS", "SHIPHISTORYCXS", "PREFERENCECXS", "TEMPLATECXS", "BOOKINGCXS", "ADDRESSBOOKCXS", "AVALIBILITYCXS", "ASHQ" ]
+        }
+      }
+    },
+    "Company" : {
+      "type" : "object",
+      "properties" : {
+        "cobrandLogoFlag" : {
+          "type" : "string"
+        },
+        "companyCode" : {
+          "type" : "string"
+        },
+        "showCobrandLogo" : {
+          "type" : "boolean"
+        },
+        "companyAdminEmail" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CompanyName" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string"
+        },
+        "division" : {
+          "type" : "string"
+        },
+        "department" : {
+          "type" : "string"
+        },
+        "storeId" : {
+          "type" : "string"
+        },
+        "companyCd" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ConfirmCreditCardInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "accountNumber" : {
+          "$ref" : "#/definitions/AccountNumber"
+        }
+      }
+    },
+    "Contact" : {
+      "type" : "object",
+      "properties" : {
+        "personName" : {
+          "type" : "string"
+        },
+        "parsedPersonName" : {
+          "$ref" : "#/definitions/ParsedPersonName"
+        },
+        "companyName" : {
+          "type" : "string"
+        },
+        "phoneNumber" : {
+          "type" : "string"
+        },
+        "phoneExtension" : {
+          "type" : "string"
+        },
+        "emailAddress" : {
+          "type" : "string"
+        },
+        "faxNumber" : {
+          "type" : "string"
+        },
+        "contactId" : {
+          "type" : "string"
+        },
+        "stateTaxId" : {
+          "type" : "string"
+        },
+        "fedralTaxId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ContactAncillaryDetail" : {
+      "type" : "object",
+      "properties" : {
+        "gender" : {
+          "type" : "string",
+          "enum" : [ "MALE", "FEMALE", "UNKNOWN" ]
+        },
+        "prefix" : {
+          "type" : "string"
+        },
+        "title" : {
+          "type" : "string"
+        },
+        "emailAddresses" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/EMailDetail"
+          }
+        },
+        "socialMediaDeails" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/SocialMediaDetail"
+          }
+        },
+        "phoneNumberDetails" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/PhoneNumberDetail"
+          }
+        },
+        "companyName" : {
+          "$ref" : "#/definitions/CompanyName"
+        }
+      }
+    },
+    "ContactAndAddress" : {
+      "type" : "object",
+      "properties" : {
+        "contact" : {
+          "$ref" : "#/definitions/Contact"
+        },
+        "contactAnciallaryDetail" : {
+          "$ref" : "#/definitions/ContactAncillaryDetail"
+        },
+        "address" : {
+          "$ref" : "#/definitions/Address"
+        },
+        "addressAncillaryDetail" : {
+          "$ref" : "#/definitions/AddressAncillaryDetail"
+        }
+      }
+    },
+    "Context" : {
+      "type" : "object",
+      "properties" : {
+        "contextType" : {
+          "type" : "string",
+          "enum" : [ "SENDER", "RECIPIENT", "PACKAGE", "COMMODITY", "PAYMENT", "BROKER", "PICKUP", "DUTIESPAYMENT", "NOTIFICATIONS", "LABEL", "IMPORTEROFRECORD", "SHIPPINGCHARGESPAYMENT", "CUSTOMSCLEARANCEDETAIL", "SYSTEMERROR", "LOGINISSUE" ]
+        },
+        "tagNotation" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CreateExamAuthenticationInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "userID" : {
+          "type" : "string"
+        },
+        "uuid" : {
+          "type" : "string"
+        },
+        "emailId" : {
+          "type" : "string"
+        },
+        "secretQuestion" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CreateExamAuthenticationOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "examId" : {
+          "type" : "string"
+        },
+        "questions" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/SecretQuestion"
+          }
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "CreateNewManagedUserInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "loginId" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        },
+        "loginOptInEmailFlag" : {
+          "type" : "string"
+        },
+        "deviceID" : {
+          "type" : "string"
+        },
+        "ipAddress" : {
+          "type" : "string"
+        },
+        "cbID" : {
+          "type" : "string"
+        },
+        "parsedContactAddress" : {
+          "$ref" : "#/definitions/ParsedContactAndAddress"
+        }
+      },
+      "xml" : {
+        "name" : "CreateNewManagedUserInputVO"
+      }
+    },
+    "CreateNewManagedUserOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "hashedUUID" : {
+          "type" : "string"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      },
+      "xml" : {
+        "name" : "CreateNewManagedUserOutputVO"
+      }
+    },
+    "CreateNewWIDMUserInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "userName" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        },
+        "loginOptInEmailFlag" : {
+          "type" : "string"
+        },
+        "reEnterPassword" : {
+          "type" : "string"
+        },
+        "deviceID" : {
+          "type" : "string"
+        },
+        "ipAddress" : {
+          "type" : "string"
+        },
+        "cbID" : {
+          "type" : "string"
+        },
+        "secretQuestionCode" : {
+          "type" : "string",
+          "enum" : [ "SP2Q1", "SP2Q2", "SP2Q3", "SP2Q4", "SP2Q5" ]
+        },
+        "secretQuestionsAnswer" : {
+          "type" : "string"
+        },
+        "parsedContactAddress" : {
+          "$ref" : "#/definitions/ParsedContactAndAddress"
+        }
+      },
+      "xml" : {
+        "name" : "CreateNewWIDMUserInputVO"
+      }
+    },
+    "CreateNewWIDMUserOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "loginCookieOutputVO" : {
+          "$ref" : "#/definitions/LoginCookieOutputVO"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      },
+      "xml" : {
+        "name" : "CreateNewWIDMUserOutputVO"
+      }
+    },
+    "CreateStorefrontRequest" : {
+      "type" : "object",
+      "properties" : {
+        "storeType" : {
+          "type" : "string"
+        }
+      },
+      "xml" : {
+        "name" : "CreateStorefrontRequest"
+      }
+    },
+    "CreateUserOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "user" : {
+          "$ref" : "#/definitions/User"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "CreateWebStoreOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "storefront" : {
+          "$ref" : "#/definitions/Storefront"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "CreditCard" : {
+      "type" : "object",
+      "properties" : {
+        "number" : {
+          "type" : "string"
+        },
+        "creditCardType" : {
+          "type" : "string",
+          "enum" : [ "AMEX", "DANKORT", "DINERS", "DISCOVER", "JCB", "MASTERCARD", "VISA", "VISAELECTRON" ]
+        },
+        "expirationDate" : {
+          "type" : "string"
+        },
+        "lastAuthenticationByFedExDate" : {
+          "type" : "string"
+        },
+        "verificationCode" : {
+          "type" : "string"
+        },
+        "devicePrint" : {
+          "type" : "string"
+        },
+        "holder" : {
+          "$ref" : "#/definitions/ParsedContactAndAddress"
+        }
+      }
+    },
+    "CreditCardFraudDetectionDetail" : {
+      "type" : "object",
+      "properties" : {
+        "ipAddress" : {
+          "type" : "string"
+        },
+        "clientCookiesEnabled" : {
+          "type" : "boolean"
+        },
+        "deviceId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CreditCardTransactionDetail" : {
+      "type" : "object",
+      "properties" : {
+        "payorAuthenticationCode" : {
+          "type" : "string"
+        },
+        "creditCardAuthorizationType" : {
+          "type" : "string",
+          "enum" : [ "AUTHORIZE_NON_ACCOUNT", "AUTHORIZE_WITH_ACCOUNT" ]
+        },
+        "fraudDetectionDetail" : {
+          "$ref" : "#/definitions/CreditCardFraudDetectionDetail"
+        },
+        "settlementScheduleType" : {
+          "type" : "string",
+          "enum" : [ "SETTLE_IMMEDIATELY", "SETTLE_NEXT_DAY", "SETTLE_ON_DELIVERY" ]
+        }
+      }
+    },
+    "Customer" : {
+      "type" : "object",
+      "properties" : {
+        "cashOnly" : {
+          "type" : "boolean"
+        },
+        "accountContactAndAddress" : {
+          "$ref" : "#/definitions/ContactAndAddress"
+        },
+        "creditCard" : {
+          "$ref" : "#/definitions/CreditCard"
+        },
+        "staleCustomer" : {
+          "type" : "boolean"
+        },
+        "creditCardStatus" : {
+          "type" : "string",
+          "enum" : [ "CURRENT", "EXPIRED", "EXPIRING_SOON" ]
+        },
+        "creditCardUpdateBlocked" : {
+          "type" : "boolean"
+        },
+        "accountStatus" : {
+          "type" : "string",
+          "enum" : [ "ACTIVE", "CASH", "DEACTIVATED" ]
+        },
+        "alcoholAllowed" : {
+          "type" : "boolean"
+        },
+        "expressDangerousGoodsAllowed" : {
+          "type" : "boolean"
+        },
+        "groundDangerousGoodsAllowed" : {
+          "type" : "boolean"
+        },
+        "agentAuthorityOnFile" : {
+          "type" : "boolean"
+        },
+        "thirdPartyConsignee" : {
+          "type" : "boolean"
+        },
+        "domesticBonusWeightEnvelopeAllowed" : {
+          "type" : "boolean"
+        },
+        "internationalBonusWeightEnvelopeAllowed" : {
+          "type" : "boolean"
+        },
+        "nonResiImporter" : {
+          "type" : "boolean"
+        },
+        "groundBrokerInclusiveAllowed" : {
+          "type" : "boolean"
+        },
+        "groundEligible" : {
+          "type" : "boolean"
+        },
+        "smartPostAccountDetail" : {
+          "$ref" : "#/definitions/SmartPostAccountDetail"
+        },
+        "groundAccountNumber" : {
+          "type" : "string"
+        },
+        "holidayDeliveryAllowed" : {
+          "type" : "boolean"
+        },
+        "specialDeliveryAllowed" : {
+          "type" : "boolean"
+        },
+        "sundayDeliveryAllowed" : {
+          "type" : "boolean"
+        },
+        "ukdomesticAllowed" : {
+          "type" : "boolean"
+        },
+        "uknextDayby9amAllowed" : {
+          "type" : "boolean"
+        },
+        "uknextDayby10amAllowed" : {
+          "type" : "boolean"
+        },
+        "uknextDayby12noonAllowed" : {
+          "type" : "boolean"
+        },
+        "uknextDayAllowed" : {
+          "type" : "boolean"
+        },
+        "ukeconomyAllowed" : {
+          "type" : "boolean"
+        },
+        "uk1DayFreightAllowed" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "CustomerAccountFranchiseeDetail" : {
+      "type" : "object",
+      "properties" : {
+        "countryCodes" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "CustomerAccountInfo" : {
+      "type" : "object",
+      "properties" : {
+        "account" : {
+          "$ref" : "#/definitions/Account"
+        },
+        "inactiveAppRoleInfos" : {
+          "type" : "array",
+          "xml" : {
+            "name" : "inactiveAppNameInfoList",
+            "wrapped" : true
+          },
+          "items" : {
+            "$ref" : "#/definitions/AppRoleInfo"
+          }
+        },
+        "activeAppRoleInfos" : {
+          "type" : "array",
+          "xml" : {
+            "name" : "activeAppRoleInfoList",
+            "wrapped" : true
+          },
+          "items" : {
+            "$ref" : "#/definitions/AppRoleInfo"
+          }
+        }
+      }
+    },
+    "CustomerCommunicationDetail" : {
+      "type" : "object",
+      "properties" : {
+        "preferredCommunicationCodeType" : {
+          "type" : "string"
+        },
+        "localization" : {
+          "$ref" : "#/definitions/Localization"
+        },
+        "emailNotificationFormat" : {
+          "type" : "string"
+        },
+        "marketingCorrespondenceTypes" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "attentionToName" : {
+          "type" : "string"
+        },
+        "socialMediaDetails" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/SocialMediaDetail"
+          }
+        }
+      }
+    },
+    "CustomerInfoControlParameters" : {
+      "type" : "object",
+      "properties" : {
+        "showPreferences" : {
+          "type" : "boolean"
+        },
+        "showBillingDetail" : {
+          "type" : "boolean"
+        },
+        "showReferences" : {
+          "type" : "boolean"
+        },
+        "showPrivileges" : {
+          "type" : "boolean"
+        },
+        "showServices" : {
+          "type" : "boolean"
+        },
+        "showAlias" : {
+          "type" : "boolean"
+        },
+        "showAccountList" : {
+          "type" : "boolean"
+        },
+        "showProfile" : {
+          "type" : "boolean"
+        },
+        "showSitewideProfile" : {
+          "type" : "boolean"
+        },
+        "showUserDefaults" : {
+          "type" : "boolean"
+        },
+        "showCustomer" : {
+          "type" : "boolean"
+        },
+        "showInactiveAccounts" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "CustomerInfoInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "account" : {
+          "$ref" : "#/definitions/Account"
+        },
+        "customerInfoControlParameters" : {
+          "$ref" : "#/definitions/CustomerInfoControlParameters"
+        },
+        "carrierCodes" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "enum" : [ "FDXE", "FDXG", "FXSP", "FXFR", "FDXC", "FXCC" ]
+          }
+        }
+      }
+    },
+    "CustomerInfoOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "userProfile" : {
+          "$ref" : "#/definitions/UserProfile"
+        },
+        "enterpriseCustomer" : {
+          "$ref" : "#/definitions/EnterpriseCustomer"
+        },
+        "shippingEnablementDetail" : {
+          "$ref" : "#/definitions/CustomerShippingEnablementDetail"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "CustomerProfileArchiveDetail" : {
+      "type" : "object",
+      "properties" : {
+        "date" : {
+          "type" : "string"
+        },
+        "reasonCode" : {
+          "type" : "string"
+        },
+        "restorationPermission" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CustomerProfileBankDetail" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "accountNumber" : {
+          "type" : "string"
+        },
+        "giroNumber" : {
+          "type" : "string"
+        },
+        "domicile" : {
+          "type" : "string"
+        },
+        "branchId" : {
+          "type" : "string"
+        },
+        "address" : {
+          "$ref" : "#/definitions/Address"
+        }
+      }
+    },
+    "CustomerProfileVATDetail" : {
+      "type" : "object",
+      "properties" : {
+        "responseCode" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CustomerRevenueDetail" : {
+      "type" : "object",
+      "properties" : {
+        "creditLimit" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "declinedReason" : {
+          "type" : "string"
+        },
+        "billingMedium" : {
+          "type" : "string"
+        },
+        "billingClosingDay" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "cashOnlyDate" : {
+          "type" : "string"
+        },
+        "preferredCurrencyType" : {
+          "type" : "string"
+        },
+        "collectionZone" : {
+          "type" : "string"
+        },
+        "numberOfDaysToPayInvoice" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "numberOfDaysToPayDuties" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      }
+    },
+    "CustomerShippingEnablementDetail" : {
+      "type" : "object",
+      "properties" : {
+        "policyGridManifests" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/PolicyGridManifest"
+          }
+        }
+      }
+    },
+    "CustomerShippingVolumeDetail" : {
+      "type" : "object",
+      "properties" : {
+        "firstShipDate" : {
+          "type" : "string"
+        },
+        "lastShipDate" : {
+          "type" : "string"
+        },
+        "totalPackageCount" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "totalRevenue" : {
+          "$ref" : "#/definitions/Money"
+        },
+        "salesTerritory" : {
+          "type" : "string"
+        },
+        "globalSalesTerritory" : {
+          "type" : "string"
+        },
+        "averageDomesticRevenue" : {
+          "$ref" : "#/definitions/Money"
+        },
+        "nationalDomesticRevenue" : {
+          "$ref" : "#/definitions/Money"
+        },
+        "nationalDiscountAccount" : {
+          "type" : "string"
+        },
+        "debutCompanyId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CustomerSuppliesDetail" : {
+      "type" : "object",
+      "properties" : {
+        "eligibleSupplies" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "DeleteRequestorAccountAssociationResponse" : {
+      "type" : "object",
+      "properties" : {
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      },
+      "xml" : {
+        "name" : "DeleteRequestorAccountAssociationResponse"
+      }
+    },
+    "DeleteWebStoreOutputV3VO" : {
+      "type" : "object",
+      "properties" : {
+        "success" : {
+          "type" : "boolean"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "DeliveryAddress" : {
+      "type" : "object",
+      "properties" : {
+        "streetLines" : {
+          "type" : "array",
+          "xml" : {
+            "name" : "streetLineList",
+            "wrapped" : true
+          },
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "city" : {
+          "type" : "string"
+        },
+        "stateOrProvinceCode" : {
+          "type" : "string"
+        },
+        "postalCode" : {
+          "type" : "string"
+        },
+        "countryCode" : {
+          "type" : "string"
+        },
+        "residential" : {
+          "type" : "boolean"
+        },
+        "addressVerificationId" : {
+          "type" : "string"
+        },
+        "addressClassification" : {
+          "type" : "string",
+          "enum" : [ "MIXED", "UNKNOWN", "BUSINESS", "RESIDENTIAL" ]
+        },
+        "addressClassificationConfidence" : {
+          "type" : "string",
+          "enum" : [ "POTENTIAL", "PERMANENT" ]
+        },
+        "sequenceNumber" : {
+          "type" : "string"
+        },
+        "shareId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "EACIUpdateUserPasswordInputRequestVO" : {
+      "type" : "object",
+      "properties" : {
+        "input" : {
+          "$ref" : "#/definitions/EACIUpdateUserPasswordInputVO"
+        }
+      }
+    },
+    "EACIUpdateUserPasswordInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "loginId" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        }
+      },
+      "xml" : {
+        "name" : "EACIUpdateUserPasswordInputVO"
+      }
+    },
+    "EACIUpdateUserPasswordOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      },
+      "xml" : {
+        "name" : "EACIUpdateUserPasswordOutputVO"
+      }
+    },
+    "EDIMasterDetail" : {
+      "type" : "object",
+      "properties" : {
+        "ediMasterAccountNumber" : {
+          "type" : "string"
+        }
+      }
+    },
+    "EMailAddressDetail" : {
+      "type" : "object",
+      "properties" : {
+        "address" : {
+          "type" : "string"
+        },
+        "contactPermission" : {
+          "type" : "string"
+        }
+      }
+    },
+    "EMailDetail" : {
+      "type" : "object",
+      "properties" : {
+        "address" : {
+          "type" : "string"
+        },
+        "permissions" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string",
+            "enum" : [ "GRANT", "DENY" ]
+          }
+        },
+        "emailNotificationFormatType" : {
+          "type" : "string",
+          "enum" : [ "HTML", "TEXT" ]
+        }
+      }
+    },
+    "EditWebStoreOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "success" : {
+          "type" : "boolean"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "EditWebStoreRequest" : {
+      "type" : "object",
+      "properties" : {
+        "editURL" : {
+          "type" : "string"
+        },
+        "id" : {
+          "type" : "string"
+        }
+      }
+    },
+    "EmailUserIdReminderOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "message" : {
+          "type" : "string"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "EmptyInputVO" : {
+      "type" : "object"
+    },
+    "EmptyOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "EnrollmentInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "contact" : {
+          "$ref" : "#/definitions/Contact"
+        },
+        "address" : {
+          "$ref" : "#/definitions/Address"
+        }
+      },
+      "xml" : {
+        "name" : "EnrollmentInputVO"
+      }
+    },
+    "EnrollmentOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "enrolled" : {
+          "type" : "boolean"
+        },
+        "addressVerificationId" : {
+          "type" : "string"
+        },
+        "enrollmentOptionsList" : {
+          "type" : "array",
+          "xml" : {
+            "wrapped" : true
+          },
+          "items" : {
+            "type" : "string",
+            "enum" : [ "POSTAL", "EXAM" ]
+          }
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      },
+      "xml" : {
+        "name" : "EnrollmentOutputVO"
+      }
+    },
+    "EnterpriseCustomer" : {
+      "type" : "object",
+      "properties" : {
+        "detailLevel" : {
+          "type" : "string"
+        },
+        "shippingEnablementDetail" : {
+          "$ref" : "#/definitions/CustomerShippingEnablementDetail"
+        },
+        "enterpriseProfile" : {
+          "$ref" : "#/definitions/EnterpriseProfile"
+        },
+        "expressProfile" : {
+          "$ref" : "#/definitions/ExpressProfile"
+        },
+        "freightProfile" : {
+          "$ref" : "#/definitions/FreightProfile"
+        },
+        "recipientProfile" : {
+          "$ref" : "#/definitions/RecipientProfile"
+        }
+      }
+    },
+    "EnterpriseProfile" : {
+      "type" : "object",
+      "properties" : {
+        "contacts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ProfileContact"
+          }
+        },
+        "accountNumber" : {
+          "type" : "string"
+        },
+        "accountStatus" : {
+          "type" : "string"
+        },
+        "accountType" : {
+          "type" : "string"
+        },
+        "accountGroups" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AccountGroupMembershipDetail"
+          }
+        },
+        "entityType" : {
+          "type" : "string"
+        },
+        "tins" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/TaxpayerIdentification"
+          }
+        },
+        "welcomeKit" : {
+          "$ref" : "#/definitions/WelcomeKitDetail"
+        },
+        "attributes" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "groupReferenceDetails" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/GroupReferenceDetail"
+          }
+        },
+        "creationDate" : {
+          "type" : "string"
+        },
+        "associatedAccounts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AssociatedCompanyAccount"
+          }
+        }
+      }
+    },
+    "ExpandedAccount" : {
+      "type" : "object",
+      "properties" : {
+        "account" : {
+          "$ref" : "#/definitions/Account"
+        },
+        "profile" : {
+          "$ref" : "#/definitions/AccountProfile"
+        },
+        "accountAlias" : {
+          "type" : "array",
+          "xml" : {
+            "name" : "accountAliasList",
+            "wrapped" : true
+          },
+          "items" : {
+            "$ref" : "#/definitions/AccountAlias"
+          }
+        }
+      }
+    },
+    "ExpressProfile" : {
+      "type" : "object",
+      "properties" : {
+        "contacts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ProfileContact"
+          }
+        },
+        "accountStatus" : {
+          "type" : "string"
+        },
+        "managementStatus" : {
+          "type" : "string"
+        },
+        "profileStatus" : {
+          "type" : "string"
+        },
+        "accountType" : {
+          "type" : "string"
+        },
+        "premierType" : {
+          "type" : "string"
+        },
+        "tins" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/TaxpayerIdentification"
+          }
+        },
+        "accountGroups" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AccountGroupMembershipDetail"
+          }
+        },
+        "attributes" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "cashType" : {
+          "type" : "string"
+        },
+        "creditCard" : {
+          "$ref" : "#/definitions/CreditCard"
+        },
+        "freightChargesPaymentType" : {
+          "type" : "string"
+        },
+        "creditLimit" : {
+          "$ref" : "#/definitions/Money"
+        },
+        "creditStatusDetail" : {
+          "$ref" : "#/definitions/ProfileCreditStatusDetail"
+        },
+        "ediMasterDetail" : {
+          "$ref" : "#/definitions/EDIMasterDetail"
+        },
+        "costCenterAccountNumber" : {
+          "type" : "string"
+        },
+        "billToAccountNumber" : {
+          "type" : "string"
+        },
+        "groundProfile" : {
+          "$ref" : "#/definitions/GroundProfile"
+        },
+        "shippingVolumeDetail" : {
+          "$ref" : "#/definitions/CustomerShippingVolumeDetail"
+        },
+        "suppliesDetail" : {
+          "$ref" : "#/definitions/CustomerSuppliesDetail"
+        },
+        "stationNumber" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "stationId" : {
+          "type" : "string"
+        },
+        "airCargoDetail" : {
+          "$ref" : "#/definitions/AirCargoDetail"
+        },
+        "bankDetails" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CustomerProfileBankDetail"
+          }
+        },
+        "vatDetails" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CustomerProfileVATDetail"
+          }
+        },
+        "interlineDetail" : {
+          "$ref" : "#/definitions/InterlineCustomerDetail"
+        },
+        "revenueDetail" : {
+          "$ref" : "#/definitions/CustomerRevenueDetail"
+        },
+        "salesContact" : {
+          "$ref" : "#/definitions/FedExEmployee"
+        },
+        "smartPostAccountDetail" : {
+          "$ref" : "#/definitions/SmartPostAccountDetail"
+        },
+        "franchiseeDetail" : {
+          "$ref" : "#/definitions/CustomerAccountFranchiseeDetail"
+        },
+        "creationDate" : {
+          "type" : "string"
+        },
+        "archiveDetail" : {
+          "$ref" : "#/definitions/CustomerProfileArchiveDetail"
+        }
+      }
+    },
+    "FedExEmployee" : {
+      "type" : "object",
+      "properties" : {
+        "employeeId" : {
+          "type" : "string"
+        },
+        "contact" : {
+          "$ref" : "#/definitions/Contact"
+        },
+        "operatingCompany" : {
+          "type" : "string"
+        },
+        "callCenterAssignedTo" : {
+          "type" : "string"
+        }
+      }
+    },
+    "FreightAccountDetail" : {
+      "type" : "object",
+      "properties" : {
+        "accountNumber" : {
+          "type" : "string"
+        },
+        "scac" : {
+          "type" : "string"
+        },
+        "type" : {
+          "type" : "string"
+        },
+        "tariff" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string"
+        }
+      }
+    },
+    "FreightProfile" : {
+      "type" : "object",
+      "properties" : {
+        "contacts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ProfileContact"
+          }
+        },
+        "aliases" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AccountAliasDetail"
+          }
+        },
+        "premierType" : {
+          "type" : "string"
+        },
+        "tins" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/TaxpayerIdentification"
+          }
+        },
+        "profileStatus" : {
+          "type" : "string"
+        },
+        "managementStatus" : {
+          "type" : "string"
+        },
+        "revenueDetail" : {
+          "$ref" : "#/definitions/CustomerRevenueDetail"
+        },
+        "freightAccountDetail" : {
+          "$ref" : "#/definitions/FreightAccountDetail"
+        },
+        "creditLimit" : {
+          "$ref" : "#/definitions/Money"
+        },
+        "creditStatusDetail" : {
+          "$ref" : "#/definitions/ProfileCreditStatusDetail"
+        },
+        "accountGroups" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AccountGroupMembershipDetail"
+          }
+        },
+        "creationDate" : {
+          "type" : "string"
+        },
+        "attributes" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "taxExemptionDetails" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/TaxExemptionDetail"
+          }
+        },
+        "archiveDetail" : {
+          "$ref" : "#/definitions/CustomerProfileArchiveDetail"
+        }
+      }
+    },
+    "GeoPoliticalEntityDetail" : {
+      "type" : "object",
+      "properties" : {
+        "countryCode" : {
+          "type" : "string"
+        }
+      }
+    },
+    "GetEACIUserStatusOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "uuid" : {
+          "type" : "string"
+        },
+        "migratedFlag" : {
+          "type" : "boolean"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      },
+      "xml" : {
+        "name" : "GetEACIUserStatusOutputVO"
+      }
+    },
+    "GetExamDetailsOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "timestamp" : {
+          "type" : "string"
+        },
+        "service" : {
+          "type" : "string"
+        },
+        "userId" : {
+          "type" : "string"
+        },
+        "examId" : {
+          "type" : "string"
+        },
+        "uuid" : {
+          "type" : "string"
+        },
+        "emailId" : {
+          "type" : "string"
+        },
+        "secretQuestion" : {
+          "type" : "string"
+        },
+        "examCreationTime" : {
+          "type" : "string"
+        },
+        "lastModifiedDate" : {
+          "type" : "string"
+        },
+        "scoringTime" : {
+          "type" : "string"
+        },
+        "passingTime" : {
+          "type" : "string"
+        },
+        "passwordResetTime" : {
+          "type" : "string"
+        },
+        "statusCd" : {
+          "type" : "string"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "GetPendingAddressesOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "pendingAddressList" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/PendingAddressVO"
+          }
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      },
+      "xml" : {
+        "name" : "GetPendingAddressesOutputVO"
+      }
+    },
+    "GetUserAuthenticationOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "ssoUID" : {
+          "type" : "string"
+        },
+        "fedExLoginID" : {
+          "type" : "string"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "GroundProfile" : {
+      "type" : "object",
+      "properties" : {
+        "groundShipperNumber" : {
+          "type" : "string"
+        },
+        "attributes" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "nationalAccountNumber" : {
+          "type" : "string"
+        }
+      }
+    },
+    "GroupReferenceDetail" : {
+      "type" : "object",
+      "properties" : {
+        "carrierCode" : {
+          "type" : "string"
+        },
+        "reference" : {
+          "type" : "string"
+        }
+      }
+    },
+    "InterlineCustomerDetail" : {
+      "type" : "object",
+      "properties" : {
+        "interlineCode" : {
+          "type" : "string"
+        },
+        "interlineEmployeeId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "IsLoggedInOutputV3VO" : {
+      "type" : "object",
+      "properties" : {
+        "userProfile" : {
+          "$ref" : "#/definitions/UserProfile"
+        },
+        "userLoggedIn" : {
+          "type" : "boolean"
+        },
+        "loginCookieOutputVO" : {
+          "$ref" : "#/definitions/LoginCookieOutputVO"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "KeyValueDetail" : {
+      "type" : "object",
+      "properties" : {
+        "key" : {
+          "type" : "string"
+        },
+        "value" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Locale" : {
+      "type" : "object",
+      "properties" : {
+        "language" : {
+          "type" : "string"
+        },
+        "script" : {
+          "type" : "string"
+        },
+        "country" : {
+          "type" : "string"
+        },
+        "variant" : {
+          "type" : "string"
+        },
+        "extensionKeys" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "unicodeLocaleAttributes" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "unicodeLocaleKeys" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "iso3Language" : {
+          "type" : "string"
+        },
+        "iso3Country" : {
+          "type" : "string"
+        },
+        "displayLanguage" : {
+          "type" : "string"
+        },
+        "displayScript" : {
+          "type" : "string"
+        },
+        "displayCountry" : {
+          "type" : "string"
+        },
+        "displayVariant" : {
+          "type" : "string"
+        },
+        "displayName" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Localization" : {
+      "type" : "object",
+      "properties" : {
+        "languageCode" : {
+          "type" : "string"
+        },
+        "localeCode" : {
+          "type" : "string"
+        }
+      }
+    },
+    "LogInInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "userName" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        },
+        "customerInfoControlParameters" : {
+          "$ref" : "#/definitions/CustomerInfoControlParameters"
+        },
+        "hostName" : {
+          "type" : "string"
+        }
+      }
+    },
+    "LogInOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "userProfile" : {
+          "$ref" : "#/definitions/UserProfile"
+        },
+        "loginCookieOutputVO" : {
+          "$ref" : "#/definitions/LoginCookieOutputVO"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "LoginCookieOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "fclCookie" : {
+          "type" : "string"
+        },
+        "nameCookie" : {
+          "type" : "string"
+        },
+        "contactNameCookie" : {
+          "type" : "string"
+        },
+        "uuidCookie" : {
+          "type" : "string"
+        }
+      }
+    },
+    "LogoutOutputV3VO" : {
+      "type" : "object",
+      "properties" : {
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "MessageParameters" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "value" : {
+          "type" : "string"
+        },
+        "convertedValue" : {
+          "type" : "object",
+          "properties" : { }
+        }
+      }
+    },
+    "MigrateUserOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "success" : {
+          "type" : "boolean"
+        },
+        "status" : {
+          "$ref" : "#/definitions/MigrateUserStatus"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      },
+      "xml" : {
+        "name" : "MigrateUserOutputVO"
+      }
+    },
+    "MigrateUserStatus" : {
+      "type" : "object",
+      "properties" : {
+        "addressBook" : {
+          "type" : "string",
+          "enum" : [ "FULL", "PARTIAL", "NONE" ]
+        },
+        "accountNumber" : {
+          "type" : "string"
+        },
+        "accountMigrated" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "MigrationDataOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "parsedContactAndAddress" : {
+          "$ref" : "#/definitions/ParsedContactAndAddress"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      },
+      "xml" : {
+        "name" : "MigrateDataOutputVO"
+      }
+    },
+    "Money" : {
+      "type" : "object",
+      "properties" : {
+        "currency" : {
+          "type" : "string"
+        },
+        "amount" : {
+          "type" : "number",
+          "format" : "double"
+        }
+      }
+    },
+    "NotificationChannel" : {
+      "type" : "object",
+      "properties" : {
+        "channelType" : {
+          "type" : "string",
+          "enum" : [ "EMAIL", "SMSTEXT", "AUTOMATED_CALL" ]
+        },
+        "emailAddress" : {
+          "type" : "string"
+        },
+        "mobileNumber" : {
+          "type" : "string"
+        },
+        "phoneNumber" : {
+          "type" : "string"
+        }
+      }
+    },
+    "NuCaptchaUserInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "loginId" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        },
+        "clientIPAddress" : {
+          "type" : "string"
+        },
+        "nuDetectSessionID" : {
+          "type" : "string"
+        },
+        "userAgent" : {
+          "type" : "string"
+        },
+        "getxForwardedFor" : {
+          "type" : "string"
+        },
+        "nucaptchaAnswer" : {
+          "type" : "string"
+        },
+        "nucaptchaToken" : {
+          "type" : "string"
+        },
+        "userCreationStatus" : {
+          "type" : "boolean"
+        },
+        "nuCaptchaForceFlag" : {
+          "type" : "string"
+        },
+        "locale" : {
+          "$ref" : "#/definitions/Locale"
+        },
+        "requestURL" : {
+          "type" : "string"
+        },
+        "ndspmd" : {
+          "type" : "string"
+        },
+        "parsedContactAddress" : {
+          "$ref" : "#/definitions/ParsedContactAndAddress"
+        }
+      },
+      "xml" : {
+        "name" : "NuCaptchaUserInputVO"
+      }
+    },
+    "NuCaptchaUserOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "html" : {
+          "type" : "string"
+        },
+        "success" : {
+          "type" : "boolean"
+        },
+        "suggestedId1" : {
+          "type" : "string"
+        },
+        "suggestedId2" : {
+          "type" : "string"
+        },
+        "userIdAvailable" : {
+          "type" : "boolean"
+        },
+        "userBlocked" : {
+          "type" : "boolean"
+        },
+        "userCreationStatus" : {
+          "type" : "string"
+        },
+        "captchaStatus" : {
+          "type" : "string"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      },
+      "xml" : {
+        "name" : "NuCaptchaUserOutputVO"
+      }
+    },
+    "Parameter" : {
+      "type" : "object",
+      "properties" : {
+        "key" : {
+          "type" : "string"
+        },
+        "value" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ParsedContact" : {
+      "type" : "object",
+      "properties" : {
+        "personName" : {
+          "$ref" : "#/definitions/ParsedPersonName"
+        },
+        "title" : {
+          "type" : "string"
+        },
+        "companyName" : {
+          "type" : "string"
+        },
+        "phoneNumber" : {
+          "type" : "string"
+        },
+        "faxNumber" : {
+          "type" : "string"
+        },
+        "emailAddress" : {
+          "type" : "string"
+        },
+        "contactId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ParsedContactAndAddress" : {
+      "type" : "object",
+      "properties" : {
+        "contact" : {
+          "$ref" : "#/definitions/ParsedContact"
+        },
+        "contactAncillaryDetail" : {
+          "$ref" : "#/definitions/ContactAncillaryDetail"
+        },
+        "address" : {
+          "$ref" : "#/definitions/Address"
+        },
+        "addressAncillaryDetail" : {
+          "$ref" : "#/definitions/AddressAncillaryDetail"
+        }
+      }
+    },
+    "ParsedPersonName" : {
+      "type" : "object",
+      "properties" : {
+        "firstName" : {
+          "type" : "string"
+        },
+        "middleName" : {
+          "type" : "string"
+        },
+        "lastName" : {
+          "type" : "string"
+        },
+        "suffix" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ParsedPhoneNumber" : {
+      "type" : "object",
+      "properties" : {
+        "countryCode" : {
+          "type" : "string"
+        },
+        "areaCode" : {
+          "type" : "string"
+        },
+        "phoneNumber" : {
+          "type" : "string"
+        },
+        "extension" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ParsedPhoneNumberDetail" : {
+      "type" : "object",
+      "properties" : {
+        "type" : {
+          "type" : "string"
+        },
+        "usage" : {
+          "type" : "string"
+        },
+        "phoneNumber" : {
+          "$ref" : "#/definitions/ParsedPhoneNumber"
+        },
+        "callPermission" : {
+          "type" : "string"
+        },
+        "textMessagePermission" : {
+          "type" : "string"
+        }
+      }
+    },
+    "PasswordResetInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "userID" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        },
+        "examId" : {
+          "type" : "string"
+        }
+      },
+      "xml" : {
+        "name" : "PasswordResetInputVO"
+      }
+    },
+    "PasswordResetOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "message" : {
+          "type" : "string"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      },
+      "xml" : {
+        "name" : "PasswordResetOutputVO"
+      }
+    },
+    "PendingAddressVO" : {
+      "type" : "object",
+      "properties" : {
+        "contact" : {
+          "$ref" : "#/definitions/Contact"
+        },
+        "address" : {
+          "$ref" : "#/definitions/Address"
+        },
+        "enrollmentOptionsList" : {
+          "type" : "array",
+          "xml" : {
+            "wrapped" : true
+          },
+          "items" : {
+            "type" : "string",
+            "enum" : [ "POSTAL", "EXAM" ]
+          }
+        }
+      }
+    },
+    "PhoneNumber" : {
+      "type" : "object",
+      "properties" : {
+        "countryCode" : {
+          "type" : "string"
+        },
+        "areaCode" : {
+          "type" : "string"
+        },
+        "localNumber" : {
+          "type" : "string"
+        },
+        "extension" : {
+          "type" : "string"
+        },
+        "personalIdentificationNumber" : {
+          "type" : "string"
+        }
+      }
+    },
+    "PhoneNumberDetail" : {
+      "type" : "object",
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "enum" : [ "FAX", "HOME", "MOBILE", "PAGER", "WORK" ]
+        },
+        "number" : {
+          "$ref" : "#/definitions/PhoneNumber"
+        },
+        "usage" : {
+          "type" : "string",
+          "enum" : [ "PRIMARY", "SECONDARY" ]
+        },
+        "permissions" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string",
+            "enum" : [ "GRANT", "DENY" ]
+          }
+        },
+        "phoneNotificationFormatType" : {
+          "type" : "string",
+          "enum" : [ "SMS_TEXT_MESSAGE" ]
+        }
+      }
+    },
+    "PinEnrollmentVerifyInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "addressVerificationId" : {
+          "type" : "string"
+        },
+        "pin" : {
+          "type" : "string"
+        }
+      }
+    },
+    "PinEnrollmentVerifyOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "responseMessage" : {
+          "type" : "string"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "PolicyGridManifest" : {
+      "type" : "object",
+      "properties" : {
+        "gridId" : {
+          "type" : "string"
+        },
+        "contents" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "PostCardInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "addressVerificationId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "PostCardOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "ProfileContact" : {
+      "type" : "object",
+      "properties" : {
+        "contactId" : {
+          "type" : "string"
+        },
+        "type" : {
+          "type" : "string"
+        },
+        "attributes" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "name" : {
+          "$ref" : "#/definitions/ParsedPersonName"
+        },
+        "company" : {
+          "type" : "string"
+        },
+        "division" : {
+          "type" : "string"
+        },
+        "department" : {
+          "type" : "string"
+        },
+        "storeId" : {
+          "type" : "string"
+        },
+        "gender" : {
+          "type" : "string"
+        },
+        "phoneNumbers" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ParsedPhoneNumberDetail"
+          }
+        },
+        "address" : {
+          "$ref" : "#/definitions/Address"
+        },
+        "addressAncillaryDetail" : {
+          "$ref" : "#/definitions/AddressAncillaryDetail"
+        },
+        "addressVerficationOverrideReason" : {
+          "type" : "string"
+        },
+        "communicationDetail" : {
+          "$ref" : "#/definitions/CustomerCommunicationDetail"
+        },
+        "customerReference" : {
+          "type" : "string"
+        },
+        "emailAddressDetails" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/EMailAddressDetail"
+          }
+        }
+      }
+    },
+    "ProfileCreditStatusDetail" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string"
+        },
+        "creditReasonCode" : {
+          "type" : "string"
+        },
+        "cashReasonCode" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ReauthenticateDeliveryAddressInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "examSessionId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "RecipientAddressAuthInfo" : {
+      "type" : "object",
+      "properties" : {
+        "addressAuthenticated" : {
+          "type" : "boolean"
+        },
+        "recipientAddressAuthReason" : {
+          "type" : "string",
+          "enum" : [ "PRE_ENROLLED", "PASSED_EXAM" ]
+        }
+      }
+    },
+    "RecipientAddressAuthenticationStatusOutputV3VO" : {
+      "type" : "object",
+      "properties" : {
+        "addressAuthenticationInfo" : {
+          "$ref" : "#/definitions/RecipientAddressAuthInfo"
+        },
+        "recipientEnrollmentInfo" : {
+          "$ref" : "#/definitions/RecipientEnrollmentInfo"
+        },
+        "recipientServicesFeatureFlag" : {
+          "type" : "string"
+        },
+        "accountNumber" : {
+          "$ref" : "#/definitions/AccountNumber"
+        },
+        "ctype" : {
+          "type" : "string"
+        },
+        "isUserLoggedIn" : {
+          "type" : "boolean"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "RecipientEnrollmentInfo" : {
+      "type" : "object",
+      "properties" : {
+        "enrollmentStatus" : {
+          "type" : "string",
+          "enum" : [ "NOT_ENROLLED", "ACTIVE", "EXPIRED" ]
+        },
+        "renewalStatus" : {
+          "type" : "string",
+          "enum" : [ "ELIGIBLE", "ELIGIBLE_PRIOR_EXPIRATION", "ELIGIBLE_WITHIN_GRACE_PERIOD", "NOT_ELIGIBLE" ]
+        },
+        "expirationDate" : {
+          "type" : "string"
+        },
+        "expirationReason" : {
+          "type" : "string",
+          "enum" : [ "NONRENEW", "FRAUD", "STATCHG", "USERREQ", "OTHER" ]
+        }
+      }
+    },
+    "RecipientEnrollmentInfoOutputV3VO" : {
+      "type" : "object",
+      "properties" : {
+        "recipientEnrollmentInfo" : {
+          "$ref" : "#/definitions/RecipientEnrollmentInfo"
+        },
+        "recipientServicesFeatureFlag" : {
+          "type" : "string",
+          "enum" : [ "MARKET_LAUNCH", "ALPHA_USER", "NON_ALPHA_USER", "UNABLE_TO_DETERMINE_ALPHA_USER" ]
+        },
+        "accountNumber" : {
+          "$ref" : "#/definitions/AccountNumber"
+        },
+        "ctype" : {
+          "type" : "string"
+        },
+        "addressPreEnrolled" : {
+          "type" : "boolean"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "RecipientNotificationEvent" : {
+      "type" : "object",
+      "properties" : {
+        "notificationType" : {
+          "type" : "string",
+          "enum" : [ "DROPOFF", "DELIVERY_ISSUE", "DAY_BEFORE_DELIVERY", "PICKUP_READY_AT_FEDEX", "POST_DELIVERY_NOTIFICATION", "DAY_OF_DELIVERY", "DELIVERY_TIME_UPDATE", "UNSPECIFIED" ]
+        },
+        "notificationChannel" : {
+          "$ref" : "#/definitions/NotificationChannel"
+        }
+      }
+    },
+    "RecipientProfile" : {
+      "type" : "object",
+      "properties" : {
+        "contacts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ProfileContact"
+          }
+        },
+        "alternateFirstNames" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "authorizedName" : {
+          "$ref" : "#/definitions/ParsedPersonName"
+        },
+        "authorizedAddresses" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AuthorizedAddress"
+          }
+        },
+        "alternateCreditCardSource" : {
+          "type" : "string"
+        },
+        "creditCard" : {
+          "$ref" : "#/definitions/CreditCard"
+        },
+        "accountStatus" : {
+          "type" : "string"
+        },
+        "profileStatus" : {
+          "type" : "string"
+        },
+        "accountTypes" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "expirationDate" : {
+          "type" : "string"
+        },
+        "expirationReason" : {
+          "type" : "string"
+        },
+        "creationDate" : {
+          "type" : "string"
+        }
+      }
+    },
+    "RecipientProfileInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "accountNumber" : {
+          "$ref" : "#/definitions/AccountNumber"
+        },
+        "recipientProfileProcessDirectiveVO" : {
+          "$ref" : "#/definitions/RecipientProfileProcessDirectiveVO"
+        }
+      }
+    },
+    "RecipientProfileOutputV3VO" : {
+      "type" : "object",
+      "properties" : {
+        "recipientProfile" : {
+          "$ref" : "#/definitions/AccountRecipientProfile"
+        },
+        "recipientProfileEnrollmentStatus" : {
+          "type" : "string",
+          "enum" : [ "NOT_ENROLLED", "ENROLLED_FOR_USER", "ENROLLED_BUT_NOT_FOR_CURRENT_USER" ]
+        },
+        "recipientServicesFeatureFlag" : {
+          "type" : "string"
+        },
+        "accountNumber" : {
+          "$ref" : "#/definitions/AccountNumber"
+        },
+        "ctype" : {
+          "type" : "string"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      },
+      "xml" : {
+        "name" : "RecipientProfileResponse"
+      }
+    },
+    "RecipientProfileProcessDirectiveVO" : {
+      "type" : "object",
+      "properties" : {
+        "skipRecipientNotificationPreferencesRetrieval" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "ReferenceInfo" : {
+      "type" : "object",
+      "required" : [ "accountNbr", "countryCode", "postalCode", "referenceValue", "shipDate" ],
+      "properties" : {
+        "referenceValue" : {
+          "type" : "string"
+        },
+        "accountNbr" : {
+          "type" : "string"
+        },
+        "postalCode" : {
+          "type" : "string"
+        },
+        "countryCode" : {
+          "type" : "string"
+        },
+        "shipDate" : {
+          "type" : "string"
+        },
+        "yourReference" : {
+          "type" : "string"
+        },
+        "purchaseOrderNumber" : {
+          "type" : "string"
+        },
+        "invoiceNumber" : {
+          "type" : "string"
+        },
+        "departmentNumber" : {
+          "type" : "string"
+        },
+        "regulatoryReferenceNumber" : {
+          "type" : "string"
+        }
+      }
+    },
+    "RemoveAccountAssociationInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "accountNumber" : {
+          "$ref" : "#/definitions/AccountNumber"
+        }
+      },
+      "xml" : {
+        "name" : "RemoveAccountAssociationRequest"
+      }
+    },
+    "RemoveAccountAssociationOutputV3VO" : {
+      "type" : "object",
+      "properties" : {
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "RenewRecipientEnrollmentInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "examSessionId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "RequestorAccountAssociationDetailsResponse" : {
+      "type" : "object",
+      "properties" : {
+        "contact" : {
+          "$ref" : "#/definitions/ParsedContact"
+        },
+        "accountDisplayName" : {
+          "type" : "string"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "ResetPasswordEmailInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "userID" : {
+          "type" : "string"
+        },
+        "uuid" : {
+          "type" : "string"
+        },
+        "emailId" : {
+          "type" : "string"
+        },
+        "secretQuestion" : {
+          "type" : "string"
+        },
+        "examId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ResetPasswordEmailOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "examId" : {
+          "type" : "string"
+        },
+        "questions" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/SecretQuestion"
+          }
+        },
+        "message" : {
+          "type" : "string"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "RetrieveManagedUserInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "uuid" : {
+          "type" : "string"
+        }
+      },
+      "xml" : {
+        "name" : "RetrieveManagedUserInputVO"
+      }
+    },
+    "RetrieveManagedUserOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "userId" : {
+          "type" : "string"
+        },
+        "success" : {
+          "type" : "string"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      },
+      "xml" : {
+        "name" : "RetrieveManagedUserOutputVO"
+      }
+    },
+    "SaveAddressAuthExamDetailsOutputV3VO" : {
+      "type" : "object",
+      "properties" : {
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      },
+      "xml" : {
+        "name" : "SaveAddressAuthExamDetailsResponse"
+      }
+    },
+    "SaveAddressAuthExamdetailsInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "trackingNumberInfo" : {
+          "$ref" : "#/definitions/TrackingNumberInfo"
+        },
+        "examSessionId" : {
+          "type" : "string"
+        },
+        "addressVerificationId" : {
+          "type" : "string"
+        },
+        "addressAuthExamInfo" : {
+          "$ref" : "#/definitions/AddressAuthExamInfo"
+        }
+      }
+    },
+    "ScoreEmailAuthenticationOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "ScoreExamAuthenticationInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "examId" : {
+          "type" : "string"
+        },
+        "questions" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/SecretQuestion"
+          }
+        }
+      },
+      "xml" : {
+        "name" : "ScoreExamAuthenticationInputVO"
+      }
+    },
+    "ScoreExamAuthenticationOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      },
+      "xml" : {
+        "name" : "ScoreExamAuthenticationOutputVO"
+      }
+    },
+    "SecretQuestion" : {
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "type" : "string",
+          "enum" : [ "SP2Q1", "SP2Q2", "SP2Q3", "SP2Q4", "SP2Q5" ]
+        },
+        "text" : {
+          "type" : "string"
+        }
+      }
+    },
+    "SecretQuestionListOutputV3VO" : {
+      "type" : "object",
+      "properties" : {
+        "secretQuestionList" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/SecretQuestion"
+          }
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "SecurityContext" : {
+      "type" : "object",
+      "properties" : {
+        "token" : {
+          "type" : "string"
+        }
+      }
+    },
+    "SendSmsConfirmationInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "mobilePhoneNumber" : {
+          "type" : "string"
+        }
+      }
+    },
+    "SendSmsConfirmationOutputV3VO" : {
+      "type" : "object",
+      "properties" : {
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "ShipRushEnabledOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "getzFirmPartnerIdentity" : {
+          "$ref" : "#/definitions/ZFirmPartnerIdentity"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "SiteWideBillingDetail" : {
+      "type" : "object",
+      "properties" : {
+        "billToAccountNbr" : {
+          "type" : "string"
+        },
+        "billToType" : {
+          "type" : "string",
+          "enum" : [ "SENDER", "RECIPIENT", "THIRD_PARTY", "CREDIT_CARD", "BILL_ANONYMOUSLY", "COLLECT", "CASH", "ACCOUNT", "CONSIGNEE" ]
+        },
+        "dutyTaxesBillToAcctNbr" : {
+          "type" : "string"
+        },
+        "dutyTaxeBillToType" : {
+          "type" : "string",
+          "enum" : [ "SENDER", "RECIPIENT", "THIRD_PARTY", "CREDIT_CARD", "BILL_ANONYMOUSLY", "COLLECT", "CASH", "ACCOUNT", "CONSIGNEE" ]
+        }
+      }
+    },
+    "SiteWidePreferences" : {
+      "type" : "object",
+      "properties" : {
+        "pickupDropoffType" : {
+          "type" : "string",
+          "enum" : [ "CONTACT_FEDEX_TO_SCHEDULE", "DROPOFF_AT_FEDEX_LOCATION", "USE_SCHEDULED_PICKUP" ]
+        },
+        "displayContactId" : {
+          "type" : "boolean"
+        },
+        "packageType" : {
+          "type" : "string",
+          "enum" : [ "FEDEX_ENVELOPE", "FEDEX_PAK", "FEDEX_BOX", "FEDEX_SMALL_BOX", "FEDEX_MEDIUM_BOX", "FEDEX_LARGE_BOX", "FEDEX_EXTRA_LARGE_BOX", "FEDEX_TUBE", "FEDEX_10KG_BOX", "FEDEX_25KG_BOX", "YOUR_PACKAGING", "SELFPACKAGE_BAG", "SELFPACKAGE_BARREL", "SELFPACKAGE_BASKET", "SELFPACKAGE_BOX", "SELFPACKAGE_BUCKET", "SELFPACKAGE_BUNDLE", "SELFPACKAGE_CAGE", "SELFPACKAGE_CARTON", "SELFPACKAGE_CASE", "SELFPACKAGE_CHEST", "SELFPACKAGE_CONTAINER", "SELFPACKAGE_CRATE", "SELFPACKAGE_CYLINDER", "SELFPACKAGE_DRUM", "SELFPACKAGE_ENVELOPE", "SELFPACKAGE_PACKAGE", "SELFPACKAGE_PAIL", "SELFPACKAGE_PALLET", "SELFPACKAGE_PARCEL", "SELFPACKAGE_PIECES", "SELFPACKAGE_REEL", "SELFPACKAGE_ROLL", "SELFPACKAGE_SACK", "SELFPACKAGE_SHRINKWRAPPED", "SELFPACKAGE_SKID", "SELFPACKAGE_TANK", "SELFPACKAGE_TOTEBIN", "SELFPACKAGE_TUBE", "SELFPACKAGE_UNIT", "SELFPACKAGE_OTHER" ]
+        },
+        "currencyType" : {
+          "type" : "string"
+        },
+        "showShipConfirmation" : {
+          "type" : "boolean"
+        },
+        "showAdvisories" : {
+          "type" : "boolean"
+        },
+        "systemOfMeasureType" : {
+          "type" : "string",
+          "enum" : [ "IMPERIAL", "METRIC" ]
+        }
+      }
+    },
+    "SiteWideProfile" : {
+      "type" : "object",
+      "properties" : {
+        "company" : {
+          "$ref" : "#/definitions/Company"
+        },
+        "siteWidePreferences" : {
+          "$ref" : "#/definitions/SiteWidePreferences"
+        },
+        "siteWideBillingDetail" : {
+          "$ref" : "#/definitions/SiteWideBillingDetail"
+        },
+        "siteWideReferences" : {
+          "$ref" : "#/definitions/SiteWideReferences"
+        },
+        "privileges" : {
+          "type" : "array",
+          "xml" : {
+            "name" : "privilegeList",
+            "wrapped" : true
+          },
+          "items" : {
+            "type" : "string",
+            "enum" : [ "DISPLAY_PENDING_SHIPMENTS", "ALLOW_SCHDL_PICKUP", "FSM", "PASSKEY", "ADMIN", "PERSONAL_AB", "SHARED_AB", "CENTRAL_AB", "ADD_SENDER", "THERMAL_PRINTER", "SCALE", "VARIABLE_HANDLING_CHARGES", "RETURN_SHIPMENT", "VIEW_LISTRATE", "VIEW_DISCOUNTRATE", "CHANGE_SHIPINFO", "CHANGE_DEFAULT_REF", "REQUIRE_REF", "NOCHANGE_REF", "REQUIRE_DEPTNUMBER", "NOCHANGE_DEPTNUMBER", "REQUIRE_INVNUMBER", "NOCHANGE_INVNUMBER", "REQUIRE_PONUMBER", "NOCHANGE_PONUMBER", "SAT_SERVICE", "COD", "INSIDE_SERVICE", "HOTLINE_ADMIN", "HOTLINE_USER", "SAT_SVC_EXPRESSFREIGHT", "APPLY_TO_RETURN_SHIPMENTS_SERVICE", "APPLY_TO_RETURN_SHIPMENTS_SPECSERVICE", "HIDE_RATE_QUOTE", "RATES_TTDISPLAY_SECTION", "RATES_TTALWAYS_DISPLAY_ALL_SVCS", "RATES_TTALWAYS_SHOW_SECTN_EXPND", "DYNAMIC_RATING_ENBLD", "REQ_RMA", "DISPLAY_BROKERS_BY_ADMIN_DEFINED", "REQUIRE_BROKER_SELECT", "HAZARDOUS_MATERIALS", "ETD", "PREVENT_CUSTOMS_VALUE_FROM_PRINTING_ON_THE_SHIPPING_LABEL", "SMARTPOST_INST_ADDRESS", "SMARTPOST_INST_LEAVE", "SMARTPOST_INST_CHANGE", "SMARTPOST_INST_FORWARD", "SMARTPOST_INST_RETURN", "CREATE_PENDING_SHIPMENTS", "CREATE_ONLY_PENDING_SHIPMENTS", "PROCESS_OTHERS_PENDING_SHIPMENTS", "DG", "DRY_ICE", "ALCOHOL", "CANCEL_REGULAR_SCHEDULED_PICKUP", "VIEW_REGULAR_SCHEDULED_PICKUP", "FREIGHT_HAZARDOUS_MATERIALS", "FREIGHT_LTL_COD", "INSIDE_DELIVERY", "INSIDE_PICKUP", "ITAR", "LIFT_GATE_DELIVERY", "LIFT_GATE_PICKUP", "LIMITED_ACCESS_DELIVERY", "LIMITED_ACCESS_PICKUP", "OVERSIZE_EXTREME_LENGTH", "TOP_LOAD_ONLY", "FOOD", "CALL_BEFORE_DELIVERY", "FREEZABLE_PROTECTION", "RETURNS_CLEARANCE" ]
+          }
+        },
+        "services" : {
+          "type" : "array",
+          "xml" : {
+            "name" : "serviceList",
+            "wrapped" : true
+          },
+          "items" : {
+            "type" : "string",
+            "enum" : [ "FIRST_OVERNIGHT", "PRIORITY_OVERNIGHT", "STANDARD_OVERNIGHT", "FEDEX_2_DAY", "FEDEX_2_DAY_AM", "FEDEX_EXPRESS_SAVER", "FEDEX_GROUND", "INTERNATIONAL_GROUND", "FEDEX_HOME_DELIVERY", "FEDEX_FIRST_FREIGHT", "FEDEX_1_DAY_FREIGHT", "FEDEX_2_DAY_FREIGHT", "FEDEX_3_DAY_FREIGHT", "INTERNATIONAL_FIRST", "EUROPE_FIRST_INTERNATIONAL_PRIORITY", "INTERNATIONAL_PRIORITY", "INTERNATIONAL_PRIORITY_EXPRESS", "INTERNATIONAL_PRIORITY_DISTRIBUTION", "INTERNATIONAL_ECONOMY_DISTRIBUTION", "INTERNATIONAL_ECONOMY", "INTERNATIONAL_PRIORITY_FREIGHT", "INTERNATIONAL_ECONOMY_FREIGHT", "SMART_POST", "SMART_POST_MEDIA", "SMART_POST_BOUND_PRINT_MATTER", "FEDEX_FREIGHT_ECONOMY", "FEDEX_FREIGHT_PRIORITY", "SAME_DAY", "SAME_DAY_CITY", "INTERNATIONAL_DISTRIBUTION_FREIGHT", "FEDEX_NEXT_DAY_EARLY_MORNING", "FEDEX_NEXT_DAY_MID_MORNING", "FEDEX_NEXT_DAY_AFTERNOON", "FEDEX_NEXT_DAY_END_OF_DAY", "FEDEX_DISTANCE_DEFERRED", "FEDEX_NEXT_DAY_FREIGHT", "FIRST_OVERNIGHT_EXPRESS_FREIGHT" ]
+          }
+        },
+        "companyAdmin" : {
+          "type" : "boolean"
+        },
+        "departmentAdmin" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "SiteWideReferenceDetail" : {
+      "type" : "object",
+      "properties" : {
+        "refernceNumber" : {
+          "type" : "string"
+        },
+        "referenceReminder" : {
+          "type" : "boolean"
+        },
+        "referenceAppliedToReturnShipments" : {
+          "type" : "boolean"
+        },
+        "referenceListId" : {
+          "type" : "string"
+        },
+        "referenceValidationType" : {
+          "type" : "string",
+          "enum" : [ "NOT_REQ_TEXT_FIELD", "REQ_TEXT_FIELD", "REQ_VIEW_LIST", "REQ_VALIDATION_TEXT", "REQ_VALIDATION_VIEW_LIST", "NOT_REQ_VIEW_LIST", "DEFAULT_AND_CANNOT_CHANGE" ]
+        }
+      }
+    },
+    "SiteWideReferences" : {
+      "type" : "object",
+      "properties" : {
+        "yourReference" : {
+          "$ref" : "#/definitions/SiteWideReferenceDetail"
+        },
+        "purchaseOrderReference" : {
+          "$ref" : "#/definitions/SiteWideReferenceDetail"
+        },
+        "invoiceReference" : {
+          "$ref" : "#/definitions/SiteWideReferenceDetail"
+        },
+        "departmentReference" : {
+          "$ref" : "#/definitions/SiteWideReferenceDetail"
+        }
+      }
+    },
+    "SmartPostAccountDetail" : {
+      "type" : "object",
+      "properties" : {
+        "allowedHubs" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "mailerId" : {
+          "type" : "string"
+        },
+        "distributionCenter" : {
+          "type" : "string"
+        },
+        "smartPostId" : {
+          "type" : "string"
+        },
+        "accountZoneType" : {
+          "type" : "string"
+        },
+        "pickUpCarrier" : {
+          "type" : "string"
+        },
+        "allowedIndicia" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "features" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "SocialMediaDetail" : {
+      "type" : "object",
+      "properties" : {
+        "platformId" : {
+          "type" : "string"
+        },
+        "attributes" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "StackTraceElement" : {
+      "type" : "object",
+      "properties" : {
+        "methodName" : {
+          "type" : "string"
+        },
+        "fileName" : {
+          "type" : "string"
+        },
+        "lineNumber" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "className" : {
+          "type" : "string"
+        },
+        "nativeMethod" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "StoreListOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "storefronts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/StorefrontImpl"
+          }
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "Storefront" : {
+      "type" : "object",
+      "properties" : {
+        "identifier" : {
+          "type" : "object",
+          "properties" : { }
+        },
+        "enabled" : {
+          "type" : "boolean"
+        },
+        "typeName" : {
+          "type" : "string"
+        },
+        "nickname" : {
+          "type" : "string"
+        },
+        "website" : {
+          "type" : "string"
+        },
+        "setupUrl" : {
+          "type" : "string"
+        },
+        "editUrl" : {
+          "type" : "string"
+        },
+        "deleteUrl" : {
+          "type" : "string"
+        }
+      }
+    },
+    "StorefrontImpl" : {
+      "type" : "object",
+      "properties" : {
+        "identifier" : {
+          "type" : "string",
+          "format" : "uuid"
+        },
+        "typeName" : {
+          "type" : "string"
+        },
+        "nickname" : {
+          "type" : "string"
+        },
+        "website" : {
+          "type" : "string"
+        },
+        "setupUrl" : {
+          "type" : "string"
+        },
+        "editUrl" : {
+          "type" : "string"
+        },
+        "deleteUrl" : {
+          "type" : "string"
+        },
+        "enabled" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "TCNInfo" : {
+      "type" : "object",
+      "properties" : {
+        "tcnValue" : {
+          "type" : "string"
+        },
+        "shipDate" : {
+          "type" : "string"
+        }
+      }
+    },
+    "TaxExemptionDetail" : {
+      "type" : "object",
+      "properties" : {
+        "exemptionType" : {
+          "type" : "string"
+        },
+        "taxCodeType" : {
+          "type" : "string"
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "geoPoliticalEntity" : {
+          "$ref" : "#/definitions/GeoPoliticalEntityDetail"
+        }
+      }
+    },
+    "TaxpayerIdentification" : {
+      "type" : "object",
+      "properties" : {
+        "tinType" : {
+          "type" : "string"
+        },
+        "number" : {
+          "type" : "string"
+        },
+        "usage" : {
+          "type" : "string"
+        },
+        "effectiveDate" : {
+          "type" : "string"
+        },
+        "expirationDate" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Throwable" : {
+      "type" : "object",
+      "properties" : {
+        "cause" : {
+          "$ref" : "#/definitions/Throwable"
+        },
+        "stackTrace" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/StackTraceElement"
+          }
+        },
+        "message" : {
+          "type" : "string"
+        },
+        "localizedMessage" : {
+          "type" : "string"
+        },
+        "suppressed" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Throwable"
+          }
+        }
+      }
+    },
+    "TrackingInfo" : {
+      "type" : "object",
+      "properties" : {
+        "trackNumberInfo" : {
+          "$ref" : "#/definitions/TrackingNumberInfo"
+        },
+        "referenceInfo" : {
+          "$ref" : "#/definitions/ReferenceInfo"
+        },
+        "tcnInfo" : {
+          "$ref" : "#/definitions/TCNInfo"
+        },
+        "referenceInfoNoInit" : {
+          "$ref" : "#/definitions/ReferenceInfo"
+        },
+        "trackNumberInfoNoInit" : {
+          "$ref" : "#/definitions/TrackingNumberInfo"
+        },
+        "tcnInfoNoInit" : {
+          "$ref" : "#/definitions/TCNInfo"
+        }
+      }
+    },
+    "TrackingNumberInfo" : {
+      "type" : "object",
+      "properties" : {
+        "trackingNumber" : {
+          "type" : "string"
+        },
+        "trackingQualifier" : {
+          "type" : "string"
+        },
+        "trackingCarrier" : {
+          "type" : "string"
+        },
+        "trackingUniqueId" : {
+          "type" : "string"
+        },
+        "trackingNumberAvailable" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "TransactionDetailVO" : {
+      "type" : "object",
+      "properties" : {
+        "sourceSystem" : {
+          "type" : "string",
+          "enum" : [ "CSHP", "CACS", "FDSD", "CRSV", "CMDC", "ROSS", "GSAI", "PMIS", "VACS", "CNTY", "IPAS", "FCL", "WFSM", "CRDT", "NDS", "RATC", "USRC", "PUDC", "SHPC", "TRKC", "WGTM", "SHARE", "SHAREPROFILE", "WRLS", "IFSS", "CDAC", "ACXIOM", "JTRACK", "WIDM", "CPCIH", "ACTC", "CLMC", "CLMS", "LOCS", "CDUS", "DOCC", "GTIC", "GTT", "WNLB", "WSSO", "WSTM", "CAAS", "CMCC", "SWAB", "CATS", "FRPB", "FRPC", "PARC", "SPST", "ADMC", "EPP", "PRDC", "ESOT", "EDD", "EPRS", "LOCC", "CLOS", "COUNTRYCXS", "SHIPHISTORYCXS", "PREFERENCECXS", "TEMPLATECXS", "BOOKINGCXS", "ADDRESSBOOKCXS", "AVALIBILITYCXS", "ASHQ" ]
+        },
+        "transactionId" : {
+          "type" : "string"
+        },
+        "transactionDetails" : {
+          "type" : "string"
+        }
+      }
+    },
+    "UpdateAccountNicknameInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "accountNumber" : {
+          "$ref" : "#/definitions/AccountNumber"
+        },
+        "accountNickname" : {
+          "type" : "string"
+        }
+      }
+    },
+    "UpdateAccountNicknameOutputV3VO" : {
+      "type" : "object",
+      "properties" : {
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "UpdateActiveFreightAliasesInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "activeAliasIdList" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "accountNumber" : {
+          "$ref" : "#/definitions/AccountNumber"
+        }
+      },
+      "xml" : {
+        "name" : "UpdateActiveFreightAliasesRequest"
+      }
+    },
+    "UpdateActiveFreightAliasesOutputV3VO" : {
+      "type" : "object",
+      "properties" : {
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "UpdateAddressAuthExamDetailsInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "examSessionId" : {
+          "type" : "string"
+        },
+        "examStatusType" : {
+          "type" : "string"
+        },
+        "examPassFail" : {
+          "type" : "string",
+          "enum" : [ "PASS", "FAIL" ]
+        },
+        "examScore" : {
+          "type" : "string"
+        },
+        "examErrorStatus" : {
+          "type" : "string"
+        }
+      }
+    },
+    "UpdateCreditCardInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "accountNumber" : {
+          "$ref" : "#/definitions/AccountNumber"
+        },
+        "creditCard" : {
+          "$ref" : "#/definitions/CreditCard"
+        },
+        "creditCardTransactionDetail" : {
+          "$ref" : "#/definitions/CreditCardTransactionDetail"
+        }
+      }
+    },
+    "UpdateEnterpriseCustomerOutputV3VO" : {
+      "type" : "object",
+      "properties" : {
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      },
+      "xml" : {
+        "name" : "UpdateEnterpriseCustomerOutputV3VO"
+      }
+    },
+    "UpdateEnterpriseCustomerOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "calException" : {
+          "$ref" : "#/definitions/CALException"
+        },
+        "transactionDetailList" : {
+          "type" : "array",
+          "xml" : {
+            "wrapped" : true
+          },
+          "items" : {
+            "$ref" : "#/definitions/TransactionDetailVO"
+          }
+        },
+        "errors" : {
+          "type" : "array",
+          "xml" : {
+            "name" : "errorList",
+            "wrapped" : true
+          },
+          "items" : {
+            "$ref" : "#/definitions/CALError"
+          }
+        },
+        "successful" : {
+          "type" : "boolean"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      },
+      "xml" : {
+        "name" : "UpdateEnterpriseCustomerResponse"
+      }
+    },
+    "UpdateLinkageIndicatorInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "accountNumber" : {
+          "$ref" : "#/definitions/AccountNumber"
+        },
+        "accountType" : {
+          "type" : "string"
+        },
+        "linkageIndicator" : {
+          "type" : "string"
+        }
+      }
+    },
+    "UpdateLinkageIndicatorRequest" : {
+      "type" : "object",
+      "properties" : {
+        "updateLinkageIndicatorInputVO" : {
+          "$ref" : "#/definitions/UpdateLinkageIndicatorInputVO"
+        },
+        "accountNumber" : {
+          "$ref" : "#/definitions/AccountNumber"
+        },
+        "linkageIndicator" : {
+          "type" : "string"
+        },
+        "accountType" : {
+          "type" : "string"
+        }
+      },
+      "xml" : {
+        "name" : "UpdateLinkageIndicatorRequest"
+      }
+    },
+    "UpdateRecipientAlternateNamesInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "alternateFirstNamesList" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "UpdateRecipientAuthorizedNameInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "authorizedName" : {
+          "$ref" : "#/definitions/ParsedPersonName"
+        },
+        "oldSequenceNumber" : {
+          "type" : "string"
+        },
+        "examexamSessionId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "UpdateRecipientContactInfoInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "parsedContactAndAddress" : {
+          "$ref" : "#/definitions/ParsedContactAndAddress"
+        }
+      }
+    },
+    "UpdateRecipientCreditCardInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "creditCard" : {
+          "$ref" : "#/definitions/CreditCard"
+        },
+        "userExpressShippingCreditCard" : {
+          "type" : "boolean"
+        },
+        "useExpressShippingCreditCard" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "UpdateRecipientDeliveryAddressInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "oldSequenceNumber" : {
+          "type" : "string"
+        },
+        "examexamSessionId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "UpdateRecipientServicesNotificationsInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "recipientNotificationEventsList" : {
+          "type" : "array",
+          "xml" : {
+            "wrapped" : true
+          },
+          "items" : {
+            "$ref" : "#/definitions/RecipientNotificationEvent"
+          }
+        }
+      },
+      "xml" : {
+        "name" : "UpdateRecipientServicesNotificationsRequest"
+      }
+    },
+    "UpdateRecipientServicesNotificationsOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "UpdateUserContactInformationInputVO" : {
+      "type" : "object",
+      "required" : [ "userProfileAddress" ],
+      "properties" : {
+        "userProfileAddress" : {
+          "$ref" : "#/definitions/ParsedContactAndAddress"
+        },
+        "securityContext" : {
+          "$ref" : "#/definitions/SecurityContext"
+        },
+        "languageCode" : {
+          "type" : "string"
+        },
+        "linkageFlag" : {
+          "type" : "boolean"
+        },
+        "deviceID" : {
+          "type" : "string"
+        },
+        "ipAddress" : {
+          "type" : "string"
+        },
+        "cbID" : {
+          "type" : "string"
+        },
+        "barEmailFlagBar" : {
+          "type" : "string"
+        }
+      },
+      "xml" : {
+        "name" : "UpdateUserContactInformationRequest"
+      }
+    },
+    "UpdateUserContactInformationOutputV3VO" : {
+      "type" : "object",
+      "properties" : {
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "UpdateUserContactInformationWIDMInputVO" : {
+      "type" : "object",
+      "properties" : {
+        "parsedContactAddress" : {
+          "$ref" : "#/definitions/ParsedContactAndAddress"
+        },
+        "uuid" : {
+          "type" : "string"
+        },
+        "deviceID" : {
+          "type" : "string"
+        },
+        "ipAddress" : {
+          "type" : "string"
+        },
+        "cbID" : {
+          "type" : "string"
+        },
+        "barEmailFlagBar" : {
+          "type" : "string"
+        }
+      },
+      "xml" : {
+        "name" : "UpdateUserContactInformationWIDMInputVO"
+      }
+    },
+    "UpdateUserContactInformationWIDMOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      },
+      "xml" : {
+        "name" : "UpdateUserContactInformationWIDMOutputVO"
+      }
+    },
+    "UpdateUserLoginInformationInputVO" : {
+      "type" : "object",
+      "required" : [ "userId" ],
+      "properties" : {
+        "userId" : {
+          "type" : "string"
+        },
+        "oldPassword" : {
+          "type" : "string"
+        },
+        "newPassword" : {
+          "type" : "string"
+        },
+        "secretQuestionCode" : {
+          "type" : "string",
+          "enum" : [ "SP2Q1", "SP2Q2", "SP2Q3", "SP2Q4", "SP2Q5" ]
+        },
+        "secretQuestionAnswer" : {
+          "type" : "string"
+        },
+        "languageCode" : {
+          "type" : "string"
+        }
+      },
+      "xml" : {
+        "name" : "UpdateUserLoginInformationRequest"
+      }
+    },
+    "UpdateUserLoginInformationOutputV3VO" : {
+      "type" : "object",
+      "properties" : {
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "User" : {
+      "type" : "object",
+      "properties" : {
+        "token" : {
+          "type" : "string"
+        },
+        "storefrontIds" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "accountId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "UserInformationOutputV3VO" : {
+      "type" : "object",
+      "properties" : {
+        "userProfile" : {
+          "$ref" : "#/definitions/UserProfile"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      }
+    },
+    "UserLoginInformation" : {
+      "type" : "object",
+      "properties" : {
+        "userId" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        },
+        "secretQuestion" : {
+          "$ref" : "#/definitions/SecretQuestion"
+        },
+        "secretQuestionAnswer" : {
+          "type" : "string"
+        }
+      }
+    },
+    "UserProfile" : {
+      "type" : "object",
+      "properties" : {
+        "profileLocked" : {
+          "type" : "boolean"
+        },
+        "loginInformation" : {
+          "$ref" : "#/definitions/UserLoginInformation"
+        },
+        "userProfileAddress" : {
+          "$ref" : "#/definitions/ParsedContactAndAddress"
+        }
+      }
+    },
+    "ViewUserProfileWIDMOutputVO" : {
+      "type" : "object",
+      "properties" : {
+        "userProfile" : {
+          "$ref" : "#/definitions/UserProfile"
+        },
+        "cxsalerts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CXSAlert"
+          }
+        }
+      },
+      "xml" : {
+        "name" : "ViewUserProfileWIDMOutputVO"
+      }
+    },
+    "WelcomeKitDetail" : {
+      "type" : "object",
+      "properties" : {
+        "isRequested" : {
+          "type" : "boolean"
+        },
+        "promotionCode" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ZFirmPartnerIdentity" : {
+      "type" : "object",
+      "properties" : {
+        "token" : {
+          "type" : "string"
+        },
+        "storefrontIds" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "associatedId" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}
